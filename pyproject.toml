@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61", "wheel", "setuptools_scm[toml]>=3.4"]
+build-backend = "setuptools.build_meta"
+
+[project]
+authors = [
+    {name = "William E Fondrie", email = "fondriew@gmail.com"}
+]
+name = "matrixmate"
+description = "Draw simple diagrams of matrices"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "click>=8.1.8",
+    "matplotlib>=3.10.1",
+    "numpy>=2.2.5",
+]
+dynamic = ["version"]
+
+
+[project.scripts]
+matrixmate = "matrixmate.main:main"
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+dynamic = ["version"]
+license = {text = "Apache-2.0"}
+
+[tool.ruff.lint]
+# D213 Multi-line docstring summary should start at the second lin
+# D203 1 blank line required before class docstring
+# D100 Missing docstring in public module
+# D401 First line of docstring should be in imperative mood
+ignore = ["D213", "D203", "D100", "D401"]
+select = ["E", "F", "W", "C", "I", "D", "UP", "N", "T20"]
+
+[tool.ruff.lint.per-file-ignores]
+"*tests/*.py" = ["ANN", "N806", "C408"]
+"__init__.py" = ["F401", "D104"]
+
+[tool.ruff.format]
+docstring-code-format = true
+preview = true
+
+[tool.setuptools]
+include-package-data = false
+
+[tool.setuptools.packages]
+find = {namespaces = false}
+
+[tool.setuptools_scm]
